@@ -96,3 +96,9 @@ Ce qui change d'une candidature à l'autre :
 | Chiffres, dates, intitulés | **Jamais** |
 
 Documenter les adaptations dans la section `## CV` du README de la candidature. Deux mois plus tard, en entretien, il faut savoir quelle version la personne en face a sous les yeux.
+
+## Version anglaise
+
+`cv-template-en.html` est le même gabarit avec les libellés de section, les commentaires et les placeholders en anglais. Mise en page, CSS et procédure d'export identiques.
+
+La langue du CV suit celle de l'email, jamais l'inverse : voir `methode/03-langue-et-region.md`. Un CV anglais accompagnant un email français signale que le CV a été recyclé sans être relu.

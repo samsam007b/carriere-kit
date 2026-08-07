@@ -113,9 +113,15 @@ Dans cet ordre, à chaque brouillon :
 
 La partie la plus rentable de cette méthode : après chaque envoi, comparer le brouillon et l'email réellement parti (dans les *Envoyés*, pas le brouillon, qui a pu changer avant l'envoi), et consigner les écarts.
 
+Les six lignes ci-dessous sont des **amorces illustratives**, pas un journal réel. Elles montrent la granularité attendue : une correction concrète, pas un commentaire général comme « trop long ». Effacez-les et remplissez avec les vôtres, ce sont les seules qui vous calibreront.
+
 | Brouillon | Envoyé | Pattern déduit |
 |---|---|---|
-| _(exemple)_ « l'intersection **exacte** de vos deux mandats » | « l'intersection de vos deux mandats » | Retirer les adjectifs d'emphase |
-| | | |
+| « l'intersection **exacte** de vos deux mandats » | « l'intersection de vos deux mandats » | Retirer les adjectifs d'emphase. Ils affaiblissent au lieu de renforcer |
+| « Je me permets de vous contacter au sujet de... » | « {{Fait observé chez eux}}. » | Supprimer l'ouverture d'excuse. Entrer directement dans le fond |
+| « un poste au sein de votre équipe » | « le poste de {{intitulé exact}} » | Article défini + intitulé exact. L'indéfini signale qu'on écrit à dix organisations |
+| « Je serais ravi d'échanger 15 minutes pour vous présenter ma démarche » | « Seriez-vous disponible pour en échanger ! » | Retirer la durée chiffrée et la promesse de présentation. Le CTA s'ouvre, il ne vend pas |
+| « rapide, rigoureux et orienté résultats » | « {{un fait daté et chiffré}} » | Remplacer le triplet d'adjectifs par une preuve. Un adjectif s'affirme, un fait se vérifie |
+| « votre expertise reconnue en {{domaine}} » | _(phrase supprimée)_ | Couper la flatterie. Elle ne dit rien du candidat et se lit comme un publipostage |
 
-Cinq ou six lignes suffisent à faire converger les brouillons suivants.
+Cinq ou six lignes de **vos** diffs suffisent à faire converger les brouillons suivants. Si trois envois d'affilée ne produisent aucune correction manuelle, la calibration tient : la table peut rester en l'état jusqu'au prochain changement de registre ou de langue.

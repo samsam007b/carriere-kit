@@ -84,3 +84,5 @@ Un trou reconnu et compensé passe. Un trou masqué se découvre.
 Dans les 24h : email de fond, pas un simple remerciement. Voir `templates/emails/outreach.md` §6.
 
 Puis, dans le README du dossier : ce qui a été dit, ce qui a été promis, la prochaine étape telle qu'**ils** l'ont formulée, et la date à partir de laquelle relancer.
+
+La suite du processus, offre, négociation, refus et clôture, est couverte par `methode/07-apres-entretien.md`.

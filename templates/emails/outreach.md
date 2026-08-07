@@ -84,7 +84,7 @@ Objet : Re: {{objet initial}}
 
 Bonjour {{Prénom}},
 
-Je me permets de revenir vers vous concernant mon message du {{date}}.
+Je reviens vers vous concernant mon message du {{date}}.
 
 {{Un élément nouveau : une avancée de votre côté, une actualité de la leur.
 Sans élément nouveau, la relance n'est qu'une répétition.}}
@@ -108,8 +108,8 @@ Objet : Re: {{objet initial}}
 
 Bonjour {{Prénom}},
 
-J'avais envoyé le message ci-dessous juste avant votre absence, je me permets
-de le remonter maintenant que vous êtes de retour.
+J'avais envoyé le message ci-dessous juste avant votre absence, je le remonte
+maintenant que vous êtes de retour.
 
 {{Une phrase de rappel du fond.}}
 

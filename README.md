@@ -4,7 +4,7 @@ Un système de pilotage de recherche d'emploi / de candidatures, conçu pour êt
 
 Ce n'est pas un template de CV. C'est un **dossier de travail structuré + une méthode écrite**, construits à partir d'une campagne réelle de plus de 25 candidatures (fédérations, cabinets de conseil, institutions européennes, entreprises tech) menée sur trois mois : ce qui a marché, ce qui a bouncé, ce qui a été refusé par un filtre automatique en 48h, et pourquoi.
 
-> Langue : français. Les templates de CV et d'emails existent en FR et EN.
+> La méthode est rédigée en français. Les templates opérationnels, emails et CV, existent en français et en anglais (`outreach.md` / `outreach-en.md`, `cv-template.html` / `cv-template-en.html`).
 
 ---
 
@@ -87,8 +87,11 @@ Chaque étape a une règle écrite. Le point non négociable : **une candidature
 | `04-anti-patterns-carriere.md` | PATTE-CAR-01 à 07 : les garde-fous qui empêchent un agent IA de produire du coaching générique, + le cadre de vérification en 6 points |
 | `05-suivi-et-relances.md` | Les 8 statuts exclusifs, la cadence de relance, l'anatomie d'une relance en 4 lignes, la lecture du délai de refus |
 | `06-lecons-apprises.md` | Ce que la campagne réelle a appris et qui ne s'invente pas en amont |
+| `07-apres-entretien.md` | Le compte rendu à chaud, l'attente, l'offre, la négociation, le refus, la clôture propre |
 
-**`templates/`** : `CLAUDE.md.template`, `profil.md`, `tracker.md`, `calendrier.md`, `entreprises.md`, `vision.md`, `positionnement.md`, `storytelling.md`, `candidature/{README,brief-entretien}.md`, `emails/outreach.md` (7 squelettes + checklist avant envoi), `cv/{cv-template.html,README.md}`.
+**`templates/`** : `CLAUDE.md.template`, `profil.md`, `tracker.md`, `calendrier.md`, `entreprises.md`, `vision.md`, `positionnement.md`, `storytelling.md`, `candidature/{README,brief-entretien}.md`, `emails/outreach.md` + `outreach-en.md` (7 squelettes chacun, checklist avant envoi, notes de registre propres à l'anglais), `cv/{cv-template.html,cv-template-en.html,README.md}`.
+
+**`exemple/`** : une piste fictive suivie de bout en bout, avec le dossier rempli, l'email parti, le diff brouillon → envoyé, le compte rendu d'entretien, et les trois fichiers de suivi au même instant. C'est la réponse à « à quel niveau de détail faut-il écrire ? ».
 
 ## Commandes Claude Code incluses
 
@@ -101,6 +104,21 @@ Chaque étape a une règle écrite. Le point non négociable : **une candidature
 | `/carriere-status` | Synthèse : pistes actives, en attente, closes, prochaines actions |
 
 Elles fonctionnent telles quelles une fois le dossier initialisé. Sur un autre outil que Claude Code, elles se lisent comme des procédures à suivre à la main.
+
+## D'où ça vient, et ce que ça vaut
+
+Honnêteté sur la base empirique, parce qu'elle conditionne ce qui se transpose et ce qui ne se transpose pas.
+
+Le kit vient d'**une seule** campagne : une personne, un peu plus de 25 pistes, trois mois, sur le marché belge et européen, dans la communication, les affaires publiques et le conseil, pour un profil junior sortant d'études. C'est un n de 1.
+
+| Ce qui se transpose largement | Ce qui est daté par ce contexte |
+|---|---|
+| La discipline de suivi : une ligne par piste, une seule source de vérité par date | Les cadences de relance, plus lentes en Europe continentale qu'aux US |
+| Les anti-patterns d'email, qui portent sur la forme et sur les tics de texte généré | Le plafond de 150 mots, adapté à un premier contact à froid, pas à un process interne |
+| L'ordre de vérification d'un contact, et la lecture du délai de refus | La vérification de la langue, spécifique aux marchés multilingues |
+| Les garde-fous anti-coaching-générique | Les usages de CV : une page et pas de photo conviennent en Europe, les conventions diffèrent ailleurs |
+
+Le kit n'a pas été testé sur un marché tech américain, sur des profils seniors, ni sur des recrutements à volume. Si vous l'y utilisez, la structure tiendra probablement, les paramètres non.
 
 ## Ce que le kit ne contient pas
 
