@@ -1,0 +1,32 @@
+# ─── Données personnelles ───────────────────────────────────────────
+# Tout ce qui contient des coordonnées, des contacts ou des documents réels
+prive/
+*-admin.md
+profil-admin.md
+
+# ─── Documents générés et pièces jointes ────────────────────────────
+*.pdf
+*.docx
+*.pages
+
+# Décommenter si vous voulez versionner vos CV HTML (recommandé :
+# le diff entre deux déclinaisons est utile)
+# candidatures/**/*.html
+
+# ─── Secrets ────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# ─── Artefacts d'outils ─────────────────────────────────────────────
+.playwright-mcp/
+.claude/settings.local.json
+*.log
+
+# ─── Système ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*~

@@ -1,0 +1,71 @@
+# Carrière — {{PRENOM}} {{NOM}}
+
+> Copier ce fichier à la racine du dossier sous le nom `CLAUDE.md`, puis remplacer tous les `{{PLACEHOLDERS}}`. C'est le fichier que l'agent IA lit à chaque session.
+
+## Objectif
+
+Piloter une recherche d'emploi sur la durée, pas seulement décrocher un poste avant {{DATE_CIBLE}}.
+
+{{CONTEXTE_EN_2_LIGNES : où vous en êtes, ce qui se termine quand, ce qui est déjà en cours}}
+
+Cible de poste : {{FIXÉE / PAS FIXÉE}}. {{Si pas fixée : sur quel critère les pistes sont retenues}}
+
+Priorités actuelles : {{PROJET_1}}, {{PROJET_2}}. Rester ouvert à toute piste qui produit le même niveau d'intérêt, y compris salariée.
+
+## Positionnement — non négociable
+
+- {{VOTRE ANGLE CENTRAL EN UNE PHRASE : la combinaison rare, formulée comme une seule compétence et pas deux}}
+- Jamais « {{ÉTIQUETTE À NE JAMAIS UTILISER}} » — toujours « {{FORMULATION CORRECTE}} »
+- Compétences avant logos : quantifier, ne pas nommer de clients sous contrat
+- **Zéro enjolivement** : aucun chiffre, titre ou résultat inventé ou arrondi dans le bon sens. En cas de doute, vérifier ou demander. Mieux vaut un chiffre exact et modeste qu'un chiffre impressionnant et flou
+
+{{ENTITÉS À MENTIONNER OU NON : ex. « telle activité n'est pas citée dans un CV externe, raison : ... ». Formuler comme une préférence par défaut évaluée au cas par cas, pas comme un interdit absolu.}}
+
+## Qui je suis — pointeurs, pas de duplication
+
+- Profil et chiffres vérifiés : `profil.md`
+- Pitch, preuves, angles par cible : `storytelling.md`
+- Cadre de décision long terme : `vision.md`
+
+Ne jamais dupliquer un chiffre depuis `profil.md` vers un autre fichier : le lire à la source à chaque fois.
+
+## Structure du dossier
+
+| Fichier | Rôle |
+|---|---|
+| `tracker.md` | Pistes actives — une ligne par piste |
+| `calendrier.md` | Toutes les dates, ordre chronologique. Source de vérité sur les échéances |
+| `entreprises.md` | Traçabilité complète : contactées et en exploration |
+| `candidatures/{nom}/` | Un dossier par candidature sérieuse |
+| `vision.md` | Cadre de décision, révisé quand il bouge |
+| `positionnement.md` | Ce que le marché et la théorie disent de ce profil |
+| `storytelling.md` | Narratif, preuves, angles |
+| `prive/` | Gitignored : documents réels, PDF, notes sensibles |
+
+Propagation : nouvelle piste → `entreprises.md`, puis `tracker.md` si elle devient active, puis `calendrier.md` dès qu'une date existe.
+
+## Règles de travail
+
+- **Une candidature sérieuse = un sous-dossier** dans `candidatures/`, jamais improvisée dans une conversation
+- Avant tout email externe : **confirmation explicite dans le tour en cours**. Une approbation donnée dans un tour précédent est expirée
+- Max 150 mots par email. Une accroche concrète et vérifiable avant tout envoi
+- Une vague de candidatures par semaine maximum
+- Avant de rédiger un email : lire `methode/01-outreach-email.md`
+- Avant de choisir un contact : lire `methode/02-verification-contact.md`
+- Avant de choisir la langue : lire `methode/03-langue-et-region.md`
+- Avant tout conseil de carrière à enjeu : appliquer le framework de `methode/04-anti-patterns-carriere.md`
+- Aucun chiffre non présent dans `profil.md` ne part dans un document externe
+
+## Style
+
+- {{LANGUE}}, direct, zéro filler, pas de reformulation de la demande
+- **Interdit dans tout texte destiné à un tiers** (email, CV, lettre, post) : le tiret cadratin et le tiret moyen (—, –) comme ponctuation de liaison. Remplacer par virgule, point, deux-points ou parenthèses. Raison : c'est un marqueur reconnaissable de texte généré, qui nuit à la crédibilité. Le tiret court d'un mot composé reste normal
+- Trois éléments ou plus : tableau plutôt que paragraphes
+
+## Auto-vérification avant toute réponse finale
+
+1. Chaque sous-tâche demandée est couverte
+2. Les fichiers modifiés ont été relus
+3. Chaque chiffre cité existe dans `profil.md`
+4. Zéro tiret cadratin dans un texte destiné à un tiers
+5. Tout envoi externe a reçu une confirmation **dans ce tour**
