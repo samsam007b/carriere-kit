@@ -1,32 +1,26 @@
-# ─── Données personnelles ───────────────────────────────────────────
-# Tout ce qui contient des coordonnées, des contacts ou des documents réels
-prive/
-*-admin.md
-profil-admin.md
+# Everything personal lives here and never leaves the machine
+workspace/
 
-# ─── Documents générés et pièces jointes ────────────────────────────
-*.pdf
-*.docx
-*.pages
-
-# Décommenter si vous voulez versionner vos CV HTML (recommandé :
-# le diff entre deux déclinaisons est utile)
-# candidatures/**/*.html
-
-# ─── Secrets ────────────────────────────────────────────────────────
+# Credentials, wherever they are
 .env
 .env.*
-!.env.example
-*.key
 *.pem
+*.key
 
-# ─── Artefacts d'outils ─────────────────────────────────────────────
-.playwright-mcp/
+# Claude Code local files
 .claude/settings.local.json
-*.log
+.claude/worktrees/
+CLAUDE.local.md
 
-# ─── Système ────────────────────────────────────────────────────────
+# Tool output
+__pycache__/
+*.pyc
+.pytest_cache/
+.playwright-mcp/
+reports/
+
+# OS and editors
 .DS_Store
 Thumbs.db
-*.swp
-*~
+.vscode/
+.idea/

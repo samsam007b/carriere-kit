@@ -1,0 +1,7 @@
+{
+  "name": "carriere-kit",
+  "version": "2.0.0",
+  "upstream": "samsam007b/carriere-kit",
+  "upstream_branch": "main",
+  "contribution_branch_prefix": "db-contrib/"
+}

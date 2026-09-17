@@ -1,131 +1,72 @@
-# Carrière Kit
+# carriere-kit
 
-Un système de pilotage de recherche d'emploi / de candidatures, conçu pour être opéré avec un agent IA (Claude Code, Cursor, ou n'importe quel assistant qui lit des fichiers dans un dossier).
+A career copilot for [Claude Code](https://claude.com/claude-code). Clone it, open Claude Code
+in the folder, say hello. It gets to know you, finds and verifies opportunities at the
+source, prepares applications and interviews, shows its work in a real browser, and never
+sends anything without your yes.
 
-Ce n'est pas un template de CV. C'est un **dossier de travail structuré + une méthode écrite**, construits à partir d'une campagne réelle de plus de 25 candidatures (fédérations, cabinets de conseil, institutions européennes, entreprises tech) menée sur trois mois : ce qui a marché, ce qui a bouncé, ce qui a été refusé par un filtre automatique en 48h, et pourquoi.
+Every user also feeds a **shared database** of companies, their job boards, postings with
+their real requirements, job titles and market notes, organised by sector. Your next search
+starts from everything the others already found. Your personal data never leaves your machine.
 
-> La méthode est rédigée en français. Les templates opérationnels, emails et CV, existent en français et en anglais (`outreach.md` / `outreach-en.md`, `cv-template.html` / `cv-template-en.html`).
-
----
-
-## Le problème que ça résout
-
-Une recherche d'emploi sérieuse, c'est 20 à 40 pistes en parallèle, chacune avec son contact, sa langue, son angle, sa date de relance, son statut. Sans structure, deux choses arrivent : on oublie des relances, et on envoie des emails génériques parce qu'on n'a plus le contexte en tête au moment d'écrire.
-
-Le kit répond aux deux :
-
-| Symptôme | Réponse du kit |
-|---|---|
-| « J'ai oublié de relancer » | `calendrier.md` : toutes les dates, un seul endroit, ordre chronologique |
-| « Où j'en suis avec eux, déjà ? » | `tracker.md` : une ligne par piste, statut + dernière action + prochaine action |
-| « Mon email sonne comme un template » | `methode/01-outreach-email.md` : 7 anti-patterns nommés, tirés de diffs réels |
-| « L'adresse a bouncé » | `methode/02-verification-contact.md` : vérifier avant d'envoyer, dans cet ordre |
-| « J'ai écrit en français à quelqu'un qui bosse en anglais » | `methode/03-langue-et-region.md` |
-| « Je refais le même CV pour la dixième fois » | `templates/cv/` : un CV HTML une page, A4, → PDF en une commande |
-| « Mon agent IA me sort du coaching carrière générique » | `methode/04-anti-patterns-carriere.md` : garde-fous explicites |
-
----
-
-## Installation
+## Quick start
 
 ```bash
-git clone <url-du-repo> ma-carriere
-cd ma-carriere
+git clone https://github.com/samsam007b/carriere-kit.git
+cd carriere-kit
+claude
 ```
 
-Puis :
+Then type `hi`. Claude explains what it can do in a few lines and offers a menu. First run
+creates your private `workspace/` folder.
 
-```bash
-./init.sh
-```
+Prerequisites: Claude Code, Python 3.9+, git. Recommended: Node.js (browser) and a free
+GitHub account with the GitHub CLI (to share database findings). Details in
+[claude-setup/README.md](claude-setup/README.md).
 
-Le script copie les templates à la racine sous leur nom de travail (`CLAUDE.md`, `profil.md`, `tracker.md`, `calendrier.md`, `entreprises.md`, `vision.md`, `positionnement.md`, `storytelling.md`) et crée `candidatures/` et `prive/`. Il est idempotent : il n'écrase jamais un fichier existant, on peut le relancer sans risque.
+## What it does
 
-Ensuite, dans l'ordre :
+| You want | Skill | What happens |
+|---|---|---|
+| Be understood | `profile` | Interview in short rounds, reads your CV or LinkedIn PDF, optional research of your public footprint (with your consent). Every fact sourced and rated |
+| Find opportunities | `sweep` | Scans hundreds of public ATS boards (Lever, Greenhouse, Ashby, SmartRecruiters, Recruitee, Workable, Personio), shows only what is new |
+| Explore a sector | `sector-scan` | Turns a member directory (federation, cluster) into mapped companies, hiring channels and a shortlist |
+| Watch it work | `browser` | Opens postings, portals and webmail in a visible browser. You handle logins and captchas, you approve every send |
+| Apply | `new-application`, `cv` | Verifies the posting, checks the gates, tailors CV, letter and email, tracks the follow-up date |
+| Stay on top | `follow-ups`, `status` | Overdue follow-ups at every session start, pipeline dashboard |
+| Interview | `interview-prep` | Company research, likely questions, recruiter roleplay drills |
+| Share | `contribute`, `connect-github` | Database findings go to this repo as pull requests, automatically |
 
-1. **Remplir `profil.md`.** Source de vérité unique sur qui vous êtes : tous les CV et emails en découlent, aucun chiffre ne doit être cité s'il n'y figure pas avec sa date de vérification.
-2. **Adapter `CLAUDE.md`.** C'est le fichier que votre agent IA lit à chaque session : positionnement, non-négociables, structure du dossier. Remplacer tous les `{{PLACEHOLDERS}}`.
-3. **Lire la méthode.** `methode/00-vue-densemble.md` (5 minutes) puis `methode/01-outreach-email.md` avant votre premier envoi.
+## How it is organised
 
-## Utilisation quotidienne
+| Path | Content | Shared? |
+|---|---|---|
+| `workspace/` | Your profile, facts, tracker, applications, settings | Never, ignored by git |
+| `db/` | Shared database: companies and postings by sector, job titles, search filters, sources, market notes, one vocabulary | Yes, through pull requests |
+| `method/` | The method: research and sources, outreach, follow-ups, gates, CV, interviews, anti-patterns | |
+| `templates/`, `examples/` | Starting files and a fictional worked example | |
+| `tools/` | Python tools (standard library only): database, tracker, ATS sweep, sync, contribution | |
+| `.claude/` | Skills, agents, hooks, settings | |
+| `claude-setup/` | Optional machine-wide Claude Code setup | |
 
-```
-ma-carriere/
-├── CLAUDE.md              # règles lues par l'agent à chaque session
-├── profil.md              # qui vous êtes, source de vérité unique
-├── tracker.md             # une ligne par piste — la vue d'ensemble
-├── calendrier.md          # toutes les dates, ordre chronologique
-├── entreprises.md         # traçabilité : postulé + en exploration
-├── vision.md              # cadre de décision long terme
-├── positionnement.md      # ce que le marché dit de votre profil
-├── storytelling.md        # le pitch, les preuves, les angles par cible
-├── candidatures/
-│   └── {entreprise}/      # un dossier par candidature sérieuse
-│       ├── README.md      # objectif, angle, contact, langue, brouillon
-│       └── CV-{entreprise}.html
-└── prive/                 # gitignored — CV réels, PDF, notes sensibles
-```
+## How Claude is set up here
 
-**La boucle** (détaillée dans `methode/00-vue-densemble.md`) :
+- **Fast**: bypass-permissions mode, no prompt for each action.
+- **Safe**: hooks block destructive commands, secrets in files, direct database edits, and any
+  final send (email, portal, form) without your explicit yes in the same turn.
+- **Token-efficient**: Opus plans (Plan Mode), Sonnet executes, Haiku searches and reads.
+  Enforced by settings, agent definitions and a hook.
+- **One language**: every clone uses the same ids from [db/vocab.json](db/vocab.json), so
+  databases merge cleanly and every Claude understands every other one.
 
-```
-repérer → qualifier → dossier → vérifier contact → trancher la langue → rédiger → envoyer → tracer → relancer → clore
-```
+## The shared database
 
-Chaque étape a une règle écrite. Le point non négociable : **une candidature sérieuse = un sous-dossier**, jamais un email improvisé dans une conversation.
+[db/README.md](db/README.md) has the schemas. In short: JSON Lines sorted by id, written
+only through `python3 tools/db.py upsert`, validated and scanned for personal data locally
+and in CI. At session end, new records are sent as a pull request from your fork (turn off
+with `"auto_contribute": false` in `workspace/config.json`). At session start, everyone
+else's merged records are pulled in. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Ce que contient le kit
+## License
 
-**`methode/` — la partie qui vaut le coup d'être lue**
-
-| Fichier | Contenu |
-|---|---|
-| `00-vue-densemble.md` | La boucle en 10 étapes, la règle de propagation entre les 3 fichiers de suivi, les 3 disciplines de fond |
-| `01-outreach-email.md` | Trancher l'objectif avant d'écrire, le plafond de 150 mots, PATTE-OUT-01 à 07, le protocole de relecture, la boucle de calibration par diff |
-| `02-verification-contact.md` | Les deux questions dans l'ordre (encore en poste ? adresse réelle ?), cas de bounce, force des accroches |
-| `03-langue-et-region.md` | Les 4 signaux classés par fiabilité, marchés multilingues, cohérence CV / email |
-| `04-anti-patterns-carriere.md` | PATTE-CAR-01 à 07 : les garde-fous qui empêchent un agent IA de produire du coaching générique, + le cadre de vérification en 6 points |
-| `05-suivi-et-relances.md` | Les 8 statuts exclusifs, la cadence de relance, l'anatomie d'une relance en 4 lignes, la lecture du délai de refus |
-| `06-lecons-apprises.md` | Ce que la campagne réelle a appris et qui ne s'invente pas en amont |
-| `07-apres-entretien.md` | Le compte rendu à chaud, l'attente, l'offre, la négociation, le refus, la clôture propre |
-
-**`templates/`** : `CLAUDE.md.template`, `profil.md`, `tracker.md`, `calendrier.md`, `entreprises.md`, `vision.md`, `positionnement.md`, `storytelling.md`, `candidature/{README,brief-entretien}.md`, `emails/outreach.md` + `outreach-en.md` (7 squelettes chacun, checklist avant envoi, notes de registre propres à l'anglais), `cv/{cv-template.html,cv-template-en.html,README.md}`.
-
-**`exemple/`** : une piste fictive suivie de bout en bout, avec le dossier rempli, l'email parti, le diff brouillon → envoyé, le compte rendu d'entretien, et les trois fichiers de suivi au même instant. C'est la réponse à « à quel niveau de détail faut-il écrire ? ».
-
-## Commandes Claude Code incluses
-
-`.claude/commands/` contient trois commandes prêtes à l'emploi :
-
-| Commande | Effet |
-|---|---|
-| `/nouvelle-candidature <entreprise>` | Crée le dossier, lance la recherche contact + langue, pré-remplit le README |
-| `/relances` | Balaie `calendrier.md`, liste ce qui est dû aujourd'hui et rédige les relances |
-| `/carriere-status` | Synthèse : pistes actives, en attente, closes, prochaines actions |
-
-Elles fonctionnent telles quelles une fois le dossier initialisé. Sur un autre outil que Claude Code, elles se lisent comme des procédures à suivre à la main.
-
-## D'où ça vient, et ce que ça vaut
-
-Honnêteté sur la base empirique, parce qu'elle conditionne ce qui se transpose et ce qui ne se transpose pas.
-
-Le kit vient d'**une seule** campagne : une personne, un peu plus de 25 pistes, trois mois, sur le marché belge et européen, dans la communication, les affaires publiques et le conseil, pour un profil junior sortant d'études. C'est un n de 1.
-
-| Ce qui se transpose largement | Ce qui est daté par ce contexte |
-|---|---|
-| La discipline de suivi : une ligne par piste, une seule source de vérité par date | Les cadences de relance, plus lentes en Europe continentale qu'aux US |
-| Les anti-patterns d'email, qui portent sur la forme et sur les tics de texte généré | Le plafond de 150 mots, adapté à un premier contact à froid, pas à un process interne |
-| L'ordre de vérification d'un contact, et la lecture du délai de refus | La vérification de la langue, spécifique aux marchés multilingues |
-| Les garde-fous anti-coaching-générique | Les usages de CV : une page et pas de photo conviennent en Europe, les conventions diffèrent ailleurs |
-
-Le kit n'a pas été testé sur un marché tech américain, sur des profils seniors, ni sur des recrutements à volume. Si vous l'y utilisez, la structure tiendra probablement, les paramètres non.
-
-## Ce que le kit ne contient pas
-
-- **Aucune donnée personnelle** : ni contacts, ni adresses email, ni noms d'entreprises ciblées, ni chiffres de portfolio. Tout est en `{{PLACEHOLDER}}`.
-- **Aucun outil payant.** Pas de CRM, pas de Mailtrack. Des fichiers markdown et un dossier git.
-- **Aucune promesse de résultat.** La méthode réduit les erreurs évitables (bounce, relance oubliée, email générique). Elle ne remplace pas un bon profil.
-
-## Licence
-
-MIT. Forkez, adaptez, gardez ce qui sert.
+MIT, see [LICENSE](LICENSE).

@@ -1,0 +1,102 @@
+{
+  "_about": "Canonical vocabulary of carriere-kit. Every database record, tool and agent uses ONLY these ids. To add a value, edit this file in a pull request and explain why in the PR. tools/db.py validate rejects anything else.",
+  "version": 1,
+  "ats": {
+    "ashby": "Ashby (jobs.ashbyhq.com)",
+    "greenhouse": "Greenhouse (boards.greenhouse.io)",
+    "lever": "Lever (jobs.lever.co)",
+    "personio": "Personio (*.jobs.personio.de)",
+    "recruitee": "Recruitee (*.recruitee.com)",
+    "smartrecruiters": "SmartRecruiters (jobs.smartrecruiters.com)",
+    "workable": "Workable (apply.workable.com)"
+  },
+  "board_status": {
+    "live": "Board answers and lists at least one posting",
+    "empty": "Board answers but lists zero postings",
+    "dead": "Board does not answer (wrong slug, company moved ATS, closed)"
+  },
+  "sectors": {
+    "aerospace-security-defence": "Aerospace, security, cyber, defence",
+    "ai-data": "AI labs, AI products, data platforms",
+    "construction-building": "Building, architecture, construction products",
+    "consulting": "Strategy, management, IT and Big Four consulting",
+    "contracting-installation": "Technical contracting, installation, maintenance",
+    "education-research": "Universities, research centres, edtech",
+    "energy": "Energy production, grids, renewables, energy services",
+    "finance-fintech": "Banking, insurance, investment, fintech, VC",
+    "healthcare-life-sciences": "Pharma, medtech, biotech, healthcare",
+    "logistics-supply-chain": "Logistics, ports, supply chain",
+    "materials-manufacturing": "Materials, industrial manufacturing, subcontracting",
+    "media-communications": "Media, agencies, PR, public affairs consultancies",
+    "mobility-automotive": "Automotive, rail, mobility services",
+    "nonprofit-ngo": "NGOs, foundations, associations, federations",
+    "public-sector-eu": "Public administrations, EU institutions and agencies",
+    "retail-consumer": "Retail, e-commerce, consumer goods, food",
+    "software-saas": "Software, SaaS, marketplaces, tech scale-ups",
+    "telecom-datacenters": "Telecom operators, networks, data centres",
+    "other": "Does not fit any sector yet (propose a new one in a PR)"
+  },
+  "job_families": {
+    "communications-marketing": "Communications, marketing, brand, content, PR",
+    "consulting": "Consultant roles (strategy, management, IT, AI)",
+    "data-ai": "Data analysis, data science, AI/ML, AI operations",
+    "engineering": "Software, hardware, technical engineering",
+    "finance": "Finance, accounting, controlling, investment",
+    "hr-people": "HR, recruiting, people operations",
+    "legal-regulatory": "Legal, compliance, regulatory affairs",
+    "product-design": "Product management, UX, design",
+    "project-program": "Project, program and PMO roles",
+    "public-affairs-policy": "Public affairs, government relations, policy",
+    "sales-bizdev": "Sales, business development, account management",
+    "strategy-operations": "Strategy, operations, chief of staff, founder's associate, bizops",
+    "other": "Anything else"
+  },
+  "seniority": {
+    "intern": "Internship, student job",
+    "graduate": "Graduate programme, trainee, entry level (0-1 year)",
+    "junior": "0-3 years",
+    "mid": "3-6 years",
+    "senior": "6+ years",
+    "lead": "Team lead, head of, manager of managers",
+    "executive": "Director, VP, C-level",
+    "unknown": "Not stated"
+  },
+  "posting_status": {
+    "open": "Confirmed open on the official source at verified_on",
+    "closed": "Confirmed closed, expired or filled",
+    "unverified": "Seen, not yet confirmed on the official source"
+  },
+  "evidence_source": {
+    "ats-api": "Public ATS API (tools/sweep.py)",
+    "official-careers": "Company careers page read directly",
+    "linkedin": "LinkedIn Jobs page",
+    "aggregator": "Third-party job board (never enough alone to mark a posting open)",
+    "member-directory": "Federation or association member directory",
+    "manual": "Entered by hand, see notes"
+  },
+  "language_levels": ["A1", "A2", "B1", "B2", "C1", "C2", "native"],
+  "note_topics": {
+    "visa-work-permit": "Visa, work permit, salary thresholds",
+    "language-requirement": "Language expectations of a market",
+    "hiring-trap": "Recurring gap between job title and real requirements",
+    "ghost-job": "Signals of stale or fake postings",
+    "market-size": "How thin or deep a market is for a profile",
+    "search-tactic": "Search terms or channels that work better"
+  },
+  "pipeline_types": {
+    "application": "Formal application submitted through a portal or email",
+    "outreach": "Message to a named contact",
+    "lead": "Opportunity spotted, nothing sent yet",
+    "research-round": "A search session with its own result table",
+    "project": "Side project, exam, programme"
+  },
+  "pipeline_status": {
+    "todo": "To do",
+    "active": "In progress (interviews, conversation)",
+    "waiting": "Sent, waiting for an answer (needs follow_up date)",
+    "offer": "Offer received",
+    "parked": "Paused on purpose",
+    "closed": "Finished (accepted, withdrawn, no answer after follow-ups)",
+    "rejected": "Rejected by them or ruled out by you"
+  }
+}

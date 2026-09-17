@@ -1,0 +1,8 @@
+{
+  "description": "Early-career strategy, operations, public affairs, policy, communications and graduate roles in European hubs.",
+  "id": "junior-strategy-policy-eu",
+  "keep_empty_location": true,
+  "location_regex": "belgi|brussel|bruxelles|gent|ghent|antwerp|leuven|amsterdam|paris|london|berlin|munich|madrid|barcelona|lisbon|dublin|remote|europe|zurich|stockholm|copenhagen|milan",
+  "title_regex": "chief of staff|founder'?s? associate|entrepreneur in residence|strategy (&|and) op|business operation|bizops|public (affairs|policy)|policy (manager|lead|officer|advisor)|govern?ment (affairs|relations)|regulatory affairs|communications (manager|lead|officer)|special projects|executive office|operations manager|program manager|graduate|junior consultant|associate consultant|trainee|marketing coordinator|junior business analyst",
+  "updated_on": "2026-09-07"
+}

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>CV {{Prénom Nom}}</title>
+<style>
+  /*
+    CV une colonne, optimisé ATS.
+
+    Règles suivies, voir method/04-cv-and-ats.md :
+    - Une seule colonne : rien ici ne dépend d'un ordre de lecture gauche-droite entre
+      colonnes pour être lu correctement par un moteur de parsing.
+    - Texte réel uniquement : aucune image ne porte d'information, aucune police d'icônes
+      ne remplace un mot.
+    - Titres sémantiques : h1 pour le nom, h2 pour chaque nom de section standard.
+    - Ligne de contact en texte simple, pas dans un header/footer que certains parseurs
+      ignorent.
+  */
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #111111;
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+  .cv {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 18mm 20mm;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 20pt;
+    margin: 0 0 2mm 0;
+    font-weight: 700;
+  }
+  .role {
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: #333333;
+    margin: 0 0 3mm 0;
+  }
+  .contact {
+    font-size: 9.5pt;
+    color: #333333;
+    margin: 0 0 6mm 0;
+  }
+  .contact span:not(:last-child)::after {
+    content: " \00B7 ";
+  }
+  h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1pt solid #111111;
+    padding-bottom: 1mm;
+    margin: 6mm 0 3mm 0;
+  }
+  h2:first-of-type { margin-top: 0; }
+  .summary {
+    margin: 0 0 2mm 0;
+  }
+  .entry {
+    margin-bottom: 3.5mm;
+  }
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 4mm;
+    font-weight: 600;
+  }
+  .entry-org {
+    font-weight: 400;
+    color: #333333;
+  }
+  .entry-dates {
+    font-weight: 400;
+    color: #555555;
+    white-space: nowrap;
+  }
+  ul {
+    margin: 1.5mm 0 0 0;
+    padding-left: 4.5mm;
+  }
+  li { margin-bottom: 0.8mm; }
+  .skills-line { margin: 0 0 1.5mm 0; }
+  .skills-line strong { font-weight: 700; }
+  .languages-line span:not(:last-child)::after {
+    content: " \00B7 ";
+  }
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="cv">
+
+    <h1>{{Prénom Nom}}</h1>
+    <p class="role">{{Titre de positionnement}}</p>
+    <p class="contact">
+      <span>{{Ville, Pays}}</span>
+      <span>{{email}}</span>
+      <span>{{téléphone}}</span>
+      <span>{{linkedin.com/in/...}}</span>
+      <span>{{URL portfolio}}</span>
+    </p>
+
+    <h2>Profil</h2>
+    <p class="summary">{{Deux à trois lignes, seulement si ça ajoute un angle que le reste
+    du CV n'apporte pas déjà. Supprimer cette section si elle ne fait que répéter le titre.}}</p>
+
+    <h2>Expérience</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span>{{Intitulé}} <span class="entry-org">, {{Organisation}}</span></span>
+        <span class="entry-dates">{{mois AAAA}} - {{mois AAAA}}</span>
+      </div>
+      <ul>
+        <li>{{Fait quantifié 1, tiré de workspace/facts.md}}</li>
+        <li>{{Fait quantifié 2}}</li>
+        <li>{{Ce qui était vraiment sous votre responsabilité}}</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span>{{Intitulé}} <span class="entry-org">, {{Organisation}}</span></span>
+        <span class="entry-dates">{{mois AAAA}} - {{mois AAAA}}</span>
+      </div>
+      <ul>
+        <li>{{Fait quantifié 1}}</li>
+        <li>{{Fait quantifié 2}}</li>
+      </ul>
+    </div>
+
+    <h2>Formation</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span>{{Diplôme}} <span class="entry-org">, {{Établissement}}</span></span>
+        <span class="entry-dates">{{AAAA}} - {{AAAA}}</span>
+      </div>
+      <p class="summary">{{Spécialisation ou sujet de mémoire pertinent, seulement si ça ajoute un signal pour ce poste.}}</p>
+    </div>
+
+    <h2>Compétences</h2>
+    <p class="skills-line"><strong>{{Bloc 1}} :</strong> {{compétence, compétence, compétence}}</p>
+    <p class="skills-line"><strong>{{Bloc 2}} :</strong> {{compétence, compétence, compétence}}</p>
+    <p class="skills-line"><strong>Outils :</strong> {{outil, outil, outil}}</p>
+
+    <h2>Langues</h2>
+    <p class="languages-line">
+      <span>{{Langue}} ({{niveau}})</span>
+      <span>{{Langue}} ({{niveau}})</span>
+    </p>
+
+    <h2>Projets</h2>
+    <div class="entry">
+      <div class="entry-header">
+        <span>{{Nom du projet}}</span>
+        <span class="entry-dates">{{AAAA}}</span>
+      </div>
+      <p class="summary">{{Une ou deux lignes sur ce que ça démontre, avec un chiffre réel s'il existe.}}</p>
+    </div>
+
+  </div>
+</body>
+</html>

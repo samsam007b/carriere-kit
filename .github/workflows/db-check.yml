@@ -1,0 +1,55 @@
+name: db-check
+
+on:
+  pull_request:
+    paths:
+      - "db/**"
+      - "tools/**"
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Only db/ may change in a database contribution
+        if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'db-contrib/')
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          changed=$(git diff --name-only "origin/${BASE_REF}...HEAD")
+          echo "$changed"
+          if echo "$changed" | grep -v '^db/' | grep -q .; then
+            echo "::error::A db-contrib/ pull request may only change files under db/"
+            exit 1
+          fi
+          if echo "$changed" | grep -q '^db/vocab.json$'; then
+            echo "::error::Vocabulary changes need their own pull request, reviewed by a maintainer"
+            exit 1
+          fi
+
+      - name: Validate schemas, vocabulary and ids
+        run: python3 tools/db.py validate
+
+      - name: Personal-data scan
+        run: python3 tools/db.py pii-scan
+
+      - name: Formatting is canonical (sorted keys and lines)
+        run: |
+          python3 tools/db.py fmt
+          git diff --exit-code -- db/ || { echo "::error::Run python3 tools/db.py fmt"; exit 1; }
+
+      - name: Tool tests
+        run: |
+          if [ -d tools/tests ]; then python3 -m unittest discover -s tools/tests -v; fi

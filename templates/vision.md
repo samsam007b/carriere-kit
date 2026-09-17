@@ -1,44 +1,58 @@
-# Vision long terme
+# Long-term vision
 
-> Document vivant, révisé quand la vision bouge. Ce n'est pas un plan à cinq ans, et ça ne doit pas le devenir.
+> A living document, revised when the vision actually changes. Not a five-year plan, and it
+> shouldn't become one. See
+> [`method/07-long-term-strategy.md`](../method/07-long-term-strategy.md).
 
-## Cadre de décision
+## Decision frame
 
-{{Comment vous décidez réellement, pas comment on est censé décider. Si vous fonctionnez à l'intérêt et à l'exploration plutôt qu'à un plan linéaire, l'écrire : c'est une information utile pour l'agent IA, qui aura sinon tendance à vous pousser vers un objectif unique. Voir methode/04-anti-patterns-carriere.md, PATTE-CAR-07.}}
+{{How you actually decide, not how you're supposed to decide. If you work by interest and
+exploration rather than a linear plan, write that explicitly: it's useful information for the
+AI assistant, which will otherwise tend to push you toward a single locked-in objective. See
+PATTE-CAR-07 in `method/05-career-anti-patterns.md`.}}
 
-Poste-cible : {{fixé / pas fixé}}. {{Si pas fixé : le critère qui fait retenir ou écarter une piste.}}
+Target role: {{fixed / not fixed}}. {{If not fixed: the criteria that make a lead worth
+keeping or dropping.}}
 
-## Ce qui compte en ce moment ({{mois année}})
+## What matters right now ({{month year}})
 
 1. {{...}}
 2. {{...}}
 
-Rester attentif aux signaux similaires ailleurs plutôt que de forcer un choix binaire.
+Stay alert to similar signals elsewhere rather than forcing a binary choice.
 
-## Critères de sélection
+## Selection criteria
 
-{{Ce qui fait qu'une piste vaut le coup. Exemples de critères qui se sont révélés discriminants : taille de structure, qualité de ce qu'on y apprend, reconnaissance d'une expertise spécifique, autonomie réelle, secteur.}}
+{{What makes a lead worth pursuing. Examples of criteria that have proven discriminating:
+organisation size, quality of what you'd learn there, recognition of a specific expertise,
+real autonomy, sector.}}
 
-{{Écrire aussi ce que ces critères écartent, et le dater. Un critère qui n'écarte rien n'est pas un critère.}}
+{{Also write what these criteria rule out, and date it. A criterion that rules nothing out
+isn't a criterion.}}
 
-## Arbitrages tranchés
+## Settled trade-offs
 
-| Date | Arbitrage | Décision |
+| Date | Question | Decision |
 |---|---|---|
-| {{date}} | {{la question posée}} | {{ce qui a été décidé, et sur quelle base}} |
+| {{YYYY-MM-DD}} | {{the question that was open}} | {{what was decided, and on what basis}} |
 
-Consigner les arbitrages évite de les rejouer tous les mois. Un arbitrage peut être révisé, mais consciemment, en écrivant ce qui a changé.
+Logging a trade-off avoids relitigating it every month. A trade-off can be revisited, but
+consciously, by writing what changed.
 
-## Le cumul est souvent possible
+## Combining statuses is often possible
 
-Avant de traiter « salarié » et « projet personnel » comme exclusifs, vérifier le cadre juridique réel du pays : régimes d'activité complémentaire, seuils de revenus, cotisations, obligations de déclaration à l'employeur. Beaucoup de choix perçus comme binaires ne le sont pas.
+Before treating "employed" and "personal project" as mutually exclusive, check the actual
+legal framework for the relevant country: rules on combining activities, income thresholds,
+contributions, disclosure obligations to an employer. Many choices that look binary aren't.
 
-{{Ce qui a été vérifié dans votre cas, avec la source et la date.}}
+{{What was checked in your case, with the source and the date.}}
 
-## Échéances connues
+## Known deadlines
 
-| Date | Échéance | Nature |
+| Date | Deadline | Nature |
 |---|---|---|
-| {{date}} | {{...}} | {{académique / administrative / contractuelle}} |
+| {{YYYY-MM-DD}} | {{...}} | {{academic / administrative / contractual}} |
 
-Les échéances administratives non rattrapables (droits sous condition d'âge ou de délai) priment sur toute considération stratégique. Elles vivent aussi dans `calendrier.md`.
+Non-recoverable administrative deadlines (a right conditioned on age or a filing window)
+override any strategic consideration. They also live in `workspace/calendar.md`, the source of
+truth for dates.

@@ -1,53 +1,62 @@
-# Storytelling — pitch, preuves, angles
+# Storytelling: pitch, proofs, angles
 
-> Le narratif du profil, décliné par cible. Se relit avant chaque entretien et avant chaque rédaction d'email.
+> The profile's narrative, broken down by target. Reread before every interview and before
+> drafting every email.
 
-## Le pitch en deux lignes
+## The two-line pitch
 
-{{Ce que vous faites, formulé comme une compétence unique et pas comme une liste. Ce qui suit le « et » doit expliquer ce qui précède, pas s'y ajouter.}}
+{{What you do, framed as a single capability, not a list. Whatever follows an "and" has to
+explain what came before, not just add to it.}}
 
-Test : si le pitch pourrait être coupé en deux et attribué à deux personnes différentes, c'est une juxtaposition, pas un positionnement.
+Test: if the pitch could be cut in half and attributed to two different people, it's a
+juxtaposition, not a positioning.
 
-## L'angle central
+## The central angle
 
-{{Un seul fil, pas une liste d'étiquettes. Ce que vous faites que peu de gens font, et pourquoi les deux moitiés de votre parcours se répondent.}}
+{{One thread, not a list of labels. What you do that few people do, and why the two halves of
+your background answer each other.}}
 
-**Prudence** : {{ce qu'il ne faut jamais revendiquer, et la formulation de repli. Exemple : jamais « spécialiste X » faute d'expérience formelle, toujours « j'accompagne / j'automatise X », en support.}}
+**Caution**: {{what never to claim, and the fallback phrasing. Example: never "X specialist"
+without formal experience; always "I support / automate X," in a supporting role.}}
 
-**Titre CV et LinkedIn** : {{formulation retenue}}
+**CV and LinkedIn headline**: {{the wording you've settled on}}
 
-## Règles de positionnement, non négociables
+## Positioning rules, non-negotiable
 
-- Jamais « {{étiquette}} » — toujours « {{formulation correcte}} »
-- Compétences avant logos : quantifier, ne pas nommer de clients sous contrat
-- Zéro enjolivement : vérifier chaque chiffre et chaque titre avant de le citer, ne jamais arrondir dans le bon sens
+- Never "{{label}}": always "{{correct phrasing}}"
+- Skills before logos: quantify, don't name clients under contract
+- Zero embellishment: verify every figure and every title before citing it, never round in the
+  favorable direction
 
-## Preuves à citer
+## Proofs to cite
 
-> Vérifiées, datées. Tous les chiffres viennent de `profil.md`.
+> Verified, dated. Every figure comes from `workspace/facts.md`.
 
-- **{{Projet}}** — {{ce que c'est, chiffre clé, votre rôle exact}}
-- **{{Projet}}** — {{...}}
-- **{{Expérience}}** — {{...}}
+- **{{Project}}**: {{what it is, the key figure, your exact role}}
+- **{{Project}}**: {{...}}
+- **{{Experience}}**: {{...}}
 
-## Les trois questions d'entretien à préparer en priorité
+## The three interview questions to prepare first
 
-Ce sont celles qui font tomber les profils atypiques.
+These are the ones that trip up an atypical profile.
 
-**1. « Parlez-moi de votre parcours. »**
-{{Deux minutes maximum. Un fil causal, pas une chronologie. Chaque étape explique la suivante.}}
+**1. "Tell me about your background."**
+{{Two minutes maximum. A causal thread, not a chronology. Each step explains the next.}}
 
-**2. « Pourquoi ce poste, avec votre profil ? »**
-{{La question de l'incohérence apparente. Y répondre de front, sans se justifier : l'hybridité est l'argument, pas un handicap à excuser.}}
+**2. "Why this role, with your profile?"**
+{{The apparent-inconsistency question. Answer it head on, without over-justifying: the hybrid
+profile is the argument, not a flaw to excuse.}}
 
-**3. « Qu'est-ce que vous ne savez pas faire ? »**
-{{Une vraie limite, nommée sans détour, avec ce qui la compense. Une fausse faiblesse déguisée en force se voit immédiatement.}}
+**3. "What can't you do?"**
+{{A real limitation, named plainly, with what compensates for it. A fake weakness dressed up as
+a strength is obvious immediately.}}
 
-## Angles par cible
+## Angles by target
 
-| Cible | Angle retenu | Dossier |
+| Target | Angle used | Case file |
 |---|---|---|
-| {{Organisation}} | {{ce qu'on met en avant ici, ce qu'on laisse en arrière-plan}} | `candidatures/{{nom}}/` |
-| {{Type de cible}} | {{angle par famille — ex. cabinets de conseil, institutions, PME}} | — |
+| {{Organisation}} | {{what's foregrounded here, what stays in the background}} | `workspace/applications/{{slug}}/` |
+| {{Type of target}} | {{angle by family, e.g. consulting firms, institutions, small companies}} | — |
 
-Un angle par famille de cible évite de refaire le travail à chaque candidature. Le dossier individuel affine, il ne repart pas de zéro.
+One angle per target family avoids redoing the work for every single application. The
+individual case file refines it; it doesn't start from zero.

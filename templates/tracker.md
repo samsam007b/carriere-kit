@@ -1,28 +1,35 @@
-# Tracker — pistes actives
+# Tracker: active leads
 
-> Une ligne par piste active. Les pistes closes descendent en bas. Les pistes seulement repérées vivent dans `entreprises.md`, pas ici.
+> One row per active lead. A lead only spotted, not yet acted on, still gets a row here with
+> `Type: lead` and `Status: todo`; a full sector sweep with many candidates belongs in `db/`,
+> not as individual rows. When a lead closes, move its row to `workspace/tracker-archive.md`
+> rather than deleting it.
 >
-> Statuts autorisés : En exploration · Dossier ouvert · Envoyé, en attente · Out of office · Bounce · En cours · Gelé · Clos.
-> Détail : `methode/05-suivi-et-relances.md`.
+> Before adding any row: `python3 tools/tracker.py check "Name"` first. See
+> [`method/01-research-and-sources.md`](../method/01-research-and-sources.md).
 
-## Actives
+| Lead | Type | Status | Submitted | Follow-up | Last action | Source |
+|---|---|---|---|---|---|---|
+| {{Organisation or contact name}} | {{application \| outreach \| lead \| research-round \| project}} | {{todo \| active \| waiting \| offer \| parked \| closed \| rejected}} | {{YYYY-MM-DD or —}} | {{YYYY-MM-DD, required when Status is waiting}} | {{one line, dated}} | {{direct link}} |
 
-| Piste | Type | Statut | Dernière action | Prochaine action |
-|---|---|---|---|---|
-| **{{Organisation}}** | Candidature externe | **Envoyé, en attente ({{date}})** | Envoyé le {{date}} à {{Prénom Nom}} ({{adresse}} — **confirmée via mailto** / *déduite par pattern, bounce possible*) depuis {{email d'envoi}}, en {{langue}}, CV en pièce jointe. Angle : {{une phrase}}. Dossier `candidatures/{{nom}}/` | Relance le {{date}} si silence |
-| **{{Organisation}}** | Candidature formelle (portail) | **Soumis le {{date}}** | Déposé sur {{portail}}, référence {{id}}. {{Contacts recruteurs identifiés}} | {{Email de signalement à un contact interne / attendre}} |
-| **{{Organisation}}** | Piste via contact interne | **Dossier en préparation** | Contact interne identifié, pas de cold outreach nécessaire. Dossier `candidatures/{{nom}}/` | Valider le dossier puis transmettre |
-| **{{Échéance administrative}}** | Admin / juridique | **À trancher** | {{Ce qui est en jeu et la date limite}} | {{Rendez-vous ou vérification à faire}} |
+## Legend
 
-## Closes
+- **Type**: one of `db/vocab.json`'s `pipeline_types`: `application` (formal, submitted through
+  a portal or email), `outreach` (message to a named contact), `lead` (spotted, nothing sent
+  yet), `research-round` (a search session with its own result table), `project` (side project,
+  exam, programme).
+- **Status**: one of `db/vocab.json`'s `pipeline_status`: `todo`, `active` (in progress,
+  interviews or conversation), `waiting` (sent, needs a `Follow-up` date), `offer`, `parked`
+  (paused on purpose), `closed` (accepted, withdrawn, or no answer after follow-ups),
+  `rejected`.
+- **Submitted / Follow-up**: `YYYY-MM-DD`, always. A `waiting` row with no `Follow-up` date is
+  invalid; `tools/tracker.py lint` flags it, and a hook may block writing it in the first place
+  depending on how this kit was set up.
+- **Last action**: a short, dated line. Enough to reconstruct what happened without opening the
+  application's case file.
+- **Source**: a direct link, not a description. If the lead came from `db/companies/` or
+  `db/postings/`, link the record id instead.
 
-| Piste | Issue | Date | Ce qu'on en retient |
-|---|---|---|---|
-| {{Organisation}} | ❌ Refusé | {{date}} | {{Délai entre soumission et refus + lecture : filtre automatique ou examen humain}} |
-| {{Organisation}} | ❌ Bounce, jamais délivré | {{date}} | {{Cause : personne partie / format d'adresse / identifiants non déterministes}}. **La piste n'a jamais été tentée** |
-| {{Organisation}} | Écarté volontairement | {{date}} | {{Raison explicite, pour ne pas la rouvrir par réflexe}} |
-| {{Organisation}} | Offre dépubliée | {{date}} | Rien à retenter |
-
----
-
-**Rappel** : une ligne sans date de prochaine action ne sera jamais traitée. Une ligne qui ne dit pas si l'adresse était confirmée ou déduite rend le silence ininterprétable.
+Run `python3 tools/tracker.py followups` regularly to see what's overdue, due today, or missing
+a follow-up date. Run `python3 tools/tracker.py lint` before trusting this file after a manual
+edit.
