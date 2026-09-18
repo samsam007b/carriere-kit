@@ -98,6 +98,38 @@ def github_ready():
     return bool(shutil.which("gh")) and run(["gh", "auth", "status"]).returncode == 0
 
 
+def outbox(send):
+    """Keep the contribution locally. Rebuilt from db/ at every run, so nothing is lost."""
+    path = os.path.join(ROOT, "workspace", "outbox")
+    os.makedirs(path, exist_ok=True)
+    with open(os.path.join(path, "db-contribution.jsonl"), "w", encoding="utf-8") as fh:
+        for ds, rec, action, _ in send:
+            fh.write(json.dumps({"dataset": ds, "action": action, "record": rec}, ensure_ascii=False, sort_keys=True) + "\n")
+
+
+def ensure_fork(target, login, tries=6):
+    """True once <target> exists and can be pushed to.
+
+    Everyone except the owner of the main repo contributes through a fork. Two things go
+    wrong here and both used to surface as an unreadable "Repository not found" on the
+    push: forking can be refused outright (disabled on the repository, or an organisation
+    that forbids it), and when it is accepted GitHub creates the fork asynchronously, so
+    the repository can still be missing a second later. So: ask, then wait for it.
+    """
+    if run(["gh", "api", f"repos/{target}", "-q", ".name"]).returncode == 0:
+        return True
+    r = run(["gh", "repo", "fork", UPSTREAM, "--clone=false", "--remote=false"], timeout=180)
+    if r.returncode != 0:
+        log(f"contribute: fork refused: {(r.stderr or r.stdout).strip()[:300]}")
+        return False
+    for i in range(tries):
+        if run(["gh", "api", f"repos/{target}", "-q", ".name"]).returncode == 0:
+            return True
+        time.sleep(2 * (i + 1))
+    log(f"contribute: fork {target} was requested but is not available yet")
+    return False
+
+
 def summary(send):
     counts = {}
     for ds, _, action, _ in send:
@@ -157,11 +189,7 @@ def _main():
     if not github_ready():
         # No GitHub account or CLI yet: keep the contribution in a local outbox. It is rebuilt
         # from db/ at every run, so nothing is lost and it goes out once GitHub is connected.
-        outbox = os.path.join(ROOT, "workspace", "outbox")
-        os.makedirs(outbox, exist_ok=True)
-        with open(os.path.join(outbox, "db-contribution.jsonl"), "w", encoding="utf-8") as fh:
-            for ds, rec, action, _ in send:
-                fh.write(json.dumps({"dataset": ds, "action": action, "record": rec}, ensure_ascii=False, sort_keys=True) + "\n")
+        outbox(send)
         log(f"contribute: GitHub not connected, {len(send)} record(s) kept in workspace/outbox/ ({title}). "
             "They will be sent automatically once GitHub is connected (skill `connect-github`).")
         return 0
@@ -170,9 +198,14 @@ def _main():
     uid = run(["gh", "api", "user", "-q", ".id"], check=True).stdout.strip()
     owner, name = UPSTREAM.split("/")
     is_owner = login.lower() == owner.lower()
-    if not is_owner:
-        run(["gh", "repo", "fork", UPSTREAM, "--clone=false", "--remote=false"], timeout=120)
     target = UPSTREAM if is_owner else f"{login}/{name}"
+    if not is_owner and not ensure_fork(target, login):
+        outbox(send)
+        log(f"contribute: cannot create a fork of {UPSTREAM} under {login}, "
+            f"{len(send)} record(s) kept in workspace/outbox/ ({title}). "
+            "Forking may be disabled on that repository, or the GitHub token may lack the 'repo' scope. "
+            "They will be sent at the next run once forking works.")
+        return 0
     branch = f"{KIT['contribution_branch_prefix']}{login}"
 
     tmp = tempfile.mkdtemp(prefix="kit-contrib-")
