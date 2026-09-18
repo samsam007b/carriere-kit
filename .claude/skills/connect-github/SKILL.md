@@ -48,5 +48,9 @@ python3 tools/contribute.py --dry-run
 python3 tools/contribute.py
 ```
 
-Show the pull request link. Remind them that later contributions happen automatically at
-session end, and how to turn it off (`"auto_contribute": false` in `workspace/config.json`).
+Show the pull request link. Say three things plainly, before the first send rather than
+after: a fork of the kit is created automatically under their account (a public repository
+they own, deletable at any time, recreated at the next send); their pull request is read by
+the repository owner and merged by them, never automatically; later contributions happen by
+themselves at session end, and `"auto_contribute": false` in `workspace/config.json` turns
+that off.
