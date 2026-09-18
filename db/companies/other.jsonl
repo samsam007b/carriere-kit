@@ -1,0 +1,1 @@
+{"country": "EU", "id": "kit-contribution-selftest", "name": "Kit Contribution Selftest", "notes": "Test record created to verify the contribution flow end to end. Delete on sight.", "sector": "other", "sources": [{"ref": "carriere-kit integration test of tools/contribute.py", "seen_on": "2026-09-18", "type": "manual"}], "updated_on": "2026-09-18"}
