@@ -56,7 +56,9 @@ subagent. If reality needs a new value, do not improvise one: propose the change
 Method in [method/01-research-and-sources.md](method/01-research-and-sources.md). Minimum:
 
 1. **Database first.** `python3 tools/db.py find <name>` and `stats` before searching the
-   web. Someone may already have scanned that sector.
+   web. Someone may already have scanned that sector. A database record dates from the day
+   someone last confirmed it: anything `db.py` flags as stale (or `python3 tools/db.py
+   stale` lists) is a lead to re-confirm, never a live opening to present as such.
 2. **No duplicates.** `python3 tools/tracker.py check "Name" ...` before presenting or
    deep-diving any lead. Give research subagents the list of known names to exclude.
 3. **Verify at the source.** A posting is `open` only if confirmed on the company careers

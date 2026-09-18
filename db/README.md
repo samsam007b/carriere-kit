@@ -74,6 +74,21 @@ alpha-2 (`BE`, `FR`), or `EU` / `WW` for Europe-wide / worldwide.
 | found_by | filter id | Which search filter surfaced it |
 | notes | string ≤ 500 | Objective, e.g. "title says junior, body asks 3 years" |
 
+**Freshness.** A posting record says what was true on its `last_seen` date, and nothing
+about today. Nothing in `db/` expires by itself: no expiry date is stored, because that
+date would itself be a guess. Age is computed when the data is read, against
+`db.STALE_DAYS` (60 days):
+
+```bash
+python3 tools/db.py stale        # postings to re-confirm at the source, and unscanned boards
+python3 tools/db.py stale 30     # stricter threshold
+```
+
+`db.py find` flags a stale posting in its output, `db.py stats` says how many open
+postings crossed the threshold, and a `status: "unverified"` record counts as stale at
+any age. Re-confirm at the official source before acting on one, and never present a
+stale record to the user as a live opening.
+
 ### job-title
 
 `{id, title, lang, family, seniority_typical: [...], markets: [...], aliases: [...], notes}`.

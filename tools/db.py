@@ -9,6 +9,7 @@ Usage (from anywhere):
   python3 tools/db.py fmt                      rewrite every file in canonical form (sorted keys, sorted by id)
   python3 tools/db.py stats                    counts per dataset and per sector
   python3 tools/db.py find <text>              search companies, postings, job titles
+  python3 tools/db.py stale [days]             postings to re-confirm at the source (default 60 days)
   python3 tools/db.py upsert <dataset> '<json>' insert or merge a record by id (dataset: company, posting,
                                                job-title, market-note, source, sweep-run, filter)
   python3 tools/db.py upsert <dataset> -       same, one JSON object per line on stdin
@@ -320,6 +321,66 @@ def pii_record(rec, label, terms=()):
     return hits
 
 
+# ---------------------------------------------------------------- freshness
+# A posting record says what was true the day it was last confirmed at the source, and
+# nothing about today. Nothing in db/ expires on its own (an expiry date written into the
+# data would be a guess, and would go stale in its own right), so freshness is computed
+# at read time from the last date the record was actually confirmed.
+STALE_DAYS = 60
+
+
+def confirmed_on(rec):
+    """The day this record was last confirmed at the source, or None."""
+    for k in ("last_seen", "checked_on", "verified_on", "last_run", "updated_on", "date"):
+        val = rec.get(k)
+        if isinstance(val, str) and DATE.match(val):
+            return val
+    ats = rec.get("ats")
+    if isinstance(ats, dict) and isinstance(ats.get("checked_on"), str) and DATE.match(ats["checked_on"]):
+        return ats["checked_on"]
+    return None
+
+
+def age_days(rec, today=None):
+    """Days since this record was last confirmed. None when it was never confirmed."""
+    day = confirmed_on(rec)
+    if not day:
+        return None
+    today = today or datetime.date.today()
+    try:
+        return (today - datetime.date.fromisoformat(day)).days
+    except ValueError:
+        return None
+
+
+def is_stale(rec, today=None, days=STALE_DAYS):
+    age = age_days(rec, today)
+    return age is None or age >= days
+
+
+def cmd_stale(days=STALE_DAYS):
+    """Records that must be re-confirmed at the source before anyone acts on them."""
+    n = 0
+    for r in (x for p in files_of("posting") for x in read(p)):
+        if r.get("status") == "closed":
+            continue
+        age = age_days(r)
+        if r.get("status") == "unverified" or is_stale(r, days=days):
+            n += 1
+            why = "never confirmed" if age is None else f"{age} days old"
+            print(f"[posting] {r['id']}  {r.get('title', '')[:60]}  {r.get('status')}, {why}")
+            print(f"           {r.get('url', '')}")
+    boards = 0
+    for r in (x for p in files_of("company") for x in read(p)):
+        ats = r.get("ats") or {}
+        if ats and ats.get("status") != "dead" and is_stale(r, days=days):
+            boards += 1
+    print(f"\n{n} posting(s) to re-confirm, {boards} job board(s) not scanned for {days}+ days", file=sys.stderr)
+    if boards:
+        print("re-scan with: python3 tools/sweep.py --filter <id>", file=sys.stderr)
+    return 0
+
+
 # ---------------------------------------------------------------- other commands
 def cmd_fmt():
     for ds in SCHEMAS:
@@ -339,6 +400,12 @@ def cmd_stats():
         if ds in ("company", "posting"):
             for p in paths:
                 print(f"  {os.path.basename(p)[:-6]:32} {len(read(p)):5}")
+    post = [r for p in files_of("posting") for r in read(p)]
+    live = [r for r in post if r.get("status") != "closed"]
+    stale = [r for r in live if is_stale(r)]
+    if stale:
+        print(f"\n{len(stale)} of {len(live)} open posting(s) not confirmed for {STALE_DAYS}+ days: "
+              f"run `python3 tools/db.py stale` before trusting them")
     return 0
 
 
@@ -349,7 +416,12 @@ def cmd_find(q):
             for r in read(p):
                 blob = slug(" ".join(str(x) for x in (r.get("name"), r.get("title"), r.get("id"), r.get("company_id"), " ".join(r.get("aliases", [])))))
                 if qn and qn in blob:
-                    print(f"[{ds}] {rel(p)}  {json.dumps(r, ensure_ascii=False)[:300]}")
+                    age = age_days(r)
+                    # a hit nobody re-confirmed recently must not read like a live fact
+                    flag = ""
+                    if ds == "posting" and r.get("status") != "closed" and is_stale(r):
+                        flag = "  STALE: re-confirm at the source" + (f" ({age} days old)" if age is not None else " (never confirmed)")
+                    print(f"[{ds}] {rel(p)}  {json.dumps(r, ensure_ascii=False)[:300]}{flag}")
     return 0
 
 
@@ -436,6 +508,8 @@ def main(argv):
         return cmd_fmt()
     if c == "stats":
         return cmd_stats()
+    if c == "stale":
+        return cmd_stale(int(argv[2]) if len(argv) > 2 and argv[2].isdigit() else STALE_DAYS)
     if c == "find" and len(argv) > 2:
         return cmd_find(" ".join(argv[2:]))
     if c == "upsert" and len(argv) > 3:

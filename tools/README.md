@@ -16,6 +16,7 @@ python3 tools/db.py fmt                      # rewrite every file in canonical f
 python3 tools/db.py stats                    # counts per dataset and per sector
 python3 tools/db.py find <text>              # search companies, postings, job titles
 python3 tools/db.py upsert <dataset> '<json>'
+python3 tools/db.py stale [days]             # postings to re-confirm at the source (default 60)
 python3 tools/db.py pii-scan [files...]      # look for personal data
 python3 tools/db.py id company "Name"        # print the canonical id for a name
 ```
@@ -25,6 +26,12 @@ For other tools written in Python, `import db` (after adding this directory to
 
 - `db.read(path)`, `db.files_of(dataset)`, `db.company_index()`
 - `db.slug(text)`, `db.posting_id(url)`
+- `db.age_days(rec)`, `db.is_stale(rec)`, `db.STALE_DAYS` -- freshness computed at read
+  time from the last date a record was confirmed (`last_seen`, `checked_on`,
+  `verified_on`, `last_run`, `updated_on` or `date`, in that order). Nothing in `db/`
+  stores an expiry date, because that date would be a guess about the future; a record
+  never confirmed, or with an unparseable date, counts as stale. `db.py find` and `stats`
+  use this, and so should any agent about to present a posting as open.
 - `db.upsert_record(dataset, rec_dict)` -- the in-process twin of
   `db.py upsert`. Validates, merges by id with the existing record, writes,
   and returns `(action, id, dest_path)` where action is `"added"` or

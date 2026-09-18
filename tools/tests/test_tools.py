@@ -8,6 +8,7 @@ the duration of the test.
 
 Run with: python3 -m unittest discover tools/tests
 """
+import datetime
 import io
 import json
 import os
@@ -199,6 +200,25 @@ class TestSweepDiffAndClose(TempDB):
         code, out, err = self.run_sweep()
         self.assertIn("acme", err)
         self.assertIn("boards dead", err)
+
+
+class TestFreshness(unittest.TestCase):
+    """A record only says what was true the day it was confirmed."""
+    TODAY = datetime.date(2026, 9, 18)
+
+    def test_age_from_the_confirmation_date(self):
+        self.assertEqual(db.age_days({"last_seen": "2026-09-08"}, self.TODAY), 10)
+        self.assertEqual(db.age_days({"ats": {"checked_on": "2026-08-19"}}, self.TODAY), 30)
+
+    def test_never_confirmed_counts_as_stale(self):
+        self.assertIsNone(db.age_days({"title": "x"}, self.TODAY))
+        self.assertTrue(db.is_stale({"title": "x"}, self.TODAY))
+        self.assertTrue(db.is_stale({"last_seen": "not-a-date"}, self.TODAY))
+
+    def test_threshold(self):
+        self.assertFalse(db.is_stale({"last_seen": "2026-08-01"}, self.TODAY, days=60))
+        self.assertTrue(db.is_stale({"last_seen": "2026-07-01"}, self.TODAY, days=60))
+        self.assertTrue(db.is_stale({"last_seen": "2026-09-01"}, self.TODAY, days=10))
 
 
 if __name__ == "__main__":
