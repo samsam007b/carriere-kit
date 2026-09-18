@@ -66,6 +66,11 @@ Also mention, in one line each, when relevant:
   GitHub account; without one, records wait in `workspace/outbox/`.
 - **Models**: planning uses Opus in Plan Mode (Shift+Tab), writing uses Sonnet, web
   research uses Haiku subagents. Nothing to configure.
+- **If they were asked to approve your actions one by one** during this session, say so
+  yourself instead of waiting for a complaint: bypass mode did not start from the project
+  settings. Offer to run `python3 claude-setup/install.py --apply bypass` once (it backs up
+  their settings), then they restart Claude Code, or launch it with
+  `claude --permission-mode bypassPermissions`.
 
 ## 4. Returning user
 
@@ -77,4 +82,5 @@ most relevant menu options for their current pipeline (read `workspace/tracker.m
 
 If they ask how something works, answer in 3 to 6 lines and point to the file:
 method in `method/`, database in `db/README.md`, contributing in `CONTRIBUTING.md`,
-safety in `CLAUDE.md` section 7. Do not recite files they did not ask about.
+safety in `CLAUDE.md` section 8, machine setup and prerequisites in
+`claude-setup/README.md`. Do not recite files they did not ask about.

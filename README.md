@@ -51,7 +51,10 @@ GitHub account with the GitHub CLI (to share database findings). Details in
 
 ## How Claude is set up here
 
-- **Fast**: bypass-permissions mode, no prompt for each action.
+- **Fast**: bypass-permissions mode, no prompt for each action. If Claude still asks
+  permission for every action, the project setting was ignored by your Claude Code version:
+  run `python3 claude-setup/install.py --apply bypass` once, restart Claude Code (or launch
+  it with `claude --permission-mode bypassPermissions`).
 - **Safe**: hooks block destructive commands, secrets in files, direct database edits, and any
   final send (email, portal, form) without your explicit yes in the same turn.
 - **Token-efficient**: Opus plans (Plan Mode), Sonnet executes, Haiku searches and reads.

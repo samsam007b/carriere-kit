@@ -107,6 +107,10 @@ The project runs in bypass-permissions mode for speed. The safety net is the hoo
 edits of `db/` data files, Haiku used for writing, and browser final sends without approval.
 Do not try to work around a blocked action: explain it to the user.
 
+If the user is still asked to approve every action, bypass mode did not start from the
+project settings. Tell them to run `python3 claude-setup/install.py --apply bypass` once and
+restart Claude Code, or to launch it with `claude --permission-mode bypassPermissions`.
+
 - **Anything that leaves the machine** (email, form submission, LinkedIn message, post)
   needs the full text shown and an explicit "yes, send" from the user in their latest
   message. Approval from an earlier message has expired.
